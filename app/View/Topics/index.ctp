@@ -7,7 +7,7 @@ if (AuthComponent::user()) {
     echo $this->HTML->link('Logout', array('controller' => 'users', 'action' => 'logout'));
 } else {
     echo $this->HTML->link('Login', array('controller' => 'users', 'action' => 'login')
-            ) .' or ' . $this->HTML->link('Rehistro', array('controller' => 'users', 'action' => 'add'));
+            ) .' or ' . $this->HTML->link('Register', array('controller' => 'users', 'action' => 'add'));
 }
 ?>
 <br>
