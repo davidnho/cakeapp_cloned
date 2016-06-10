@@ -150,4 +150,11 @@ class UsersController extends AppController {
         return $this->redirect(array('action' => 'index'));
     }
 
+    
+    //noel review
+    
+    public function listusers(){
+       $data = $this->User->find('all');
+       $this->set('users',$data);
+    }
 }

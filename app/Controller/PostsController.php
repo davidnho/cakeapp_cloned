@@ -35,4 +35,15 @@ class PostsController extends AppController {
         $this->set('post', $data);
     }
 
+    //noel review
+    public function addpost(){
+        if($this->request->is('post')){
+            $this->Post->create();
+            if($this->Post->save($this->request->data)){
+                $this->Session->setFlash('The post have been created');
+//                $this->redirect('index');
+            }
+        }
+        $this->set('topics',  $this->Post->Topic->find('list'));
+    }
 }
