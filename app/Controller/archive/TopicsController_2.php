@@ -61,10 +61,5 @@ class TopicsController extends AppController {
             }
         }
     }
-    
-    //noel review
-    public function create(){
-        
-    }
 
 }
