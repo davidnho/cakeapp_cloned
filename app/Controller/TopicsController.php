@@ -66,7 +66,8 @@ class TopicsController extends AppController {
     public function create() {
 
         if ($this->request->is('post')) {
-            $this->Topic->create(); //create the model
+             $this->Topic->create(); //create the model
+             $this->request->data['Topic']['visible'] = 2;
             //save the data coming from the form. if the data saved, redirect
             if ($this->Topic->save($this->request->data)) {
                 $this->Session->setFlash('The topic has been created');

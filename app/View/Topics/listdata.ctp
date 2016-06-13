@@ -1,6 +1,16 @@
 <h2>Topics</h2>
 
 <?php echo $this->HTML->link('Create a new topic',array('controller'=>'topics','action'=>'create')); ?>
+<br>
+
+<?php if (AuthComponent::user()) {
+  echo $this->HTML->link('Logout',array('controller'=>'users','action'=>'logout'));    
+}  else {
+    echo $this->HTML->link('Login',array('controller'=>'users','action'=>'login'));    
+}
+?>
+
+<?php?>
 
 <table>
     <tr>

@@ -17,18 +17,8 @@ class UsersController extends AppController {
      */
     public $components = array('Paginator');
 
-    /**
-     * index method
-     *
-     * @return void
-     */
     public function beforeFilter() {
         $this->Auth->allow('add');
-    }
-
-    public function getUsernameById($id){
-        $data = $this->User->findById($id);
-        return $data;
     }
 
     public function login() {
@@ -36,7 +26,7 @@ class UsersController extends AppController {
             if ($this->Auth->login()) {
                 return $this->redirect($this->Auth->redirectUrl());
             } else {
-                $this->Session->setFlash('Invalid username or password');
+                $this->Session->setFlash('Invalid Username or Password');
             }
         }
     }
@@ -47,11 +37,6 @@ class UsersController extends AppController {
     }
 
     public function index() {
-        
-        if(AuthComponent::user('role')==1){
-               $this->request->data['Topic']['visible'] = 2; 
-            }
-        
         $this->User->recursive = 0;
         $this->set('users', $this->Paginator->paginate());
     }
@@ -64,11 +49,6 @@ class UsersController extends AppController {
      * @return void
      */
     public function view($id = null) {
-        
-        if(AuthComponent::user('role')==1){
-               $this->request->data['Topic']['visible'] = 2; 
-            }
-        
         if (!$this->User->exists($id)) {
             throw new NotFoundException(__('Invalid user'));
         }
@@ -85,7 +65,7 @@ class UsersController extends AppController {
         if ($this->request->is('post')) {
             $this->User->create();
             $this->request->data['User']['password'] = AuthComponent::password($this->request->data['User']['password']);
-            $this->request->data['User']['role'] = 1;
+            $this->request->data['User']['role'] = 1 ;
             if ($this->User->save($this->request->data)) {
                 $this->Session->setFlash(__('The user has been saved.'));
                 return $this->redirect(array('action' => 'index'));
@@ -103,11 +83,6 @@ class UsersController extends AppController {
      * @return void
      */
     public function edit($id = null) {
-        
-        if(AuthComponent::user('role')==1){
-               $this->request->data['Topic']['visible'] = 2; 
-            }
-        
         if (!$this->User->exists($id)) {
             throw new NotFoundException(__('Invalid user'));
         }
@@ -132,11 +107,6 @@ class UsersController extends AppController {
      * @return void
      */
     public function delete($id = null) {
-        
-        if(AuthComponent::user('role')==1){
-               $this->request->data['Topic']['visible'] = 2; 
-            }
-        
         $this->User->id = $id;
         if (!$this->User->exists()) {
             throw new NotFoundException(__('Invalid user'));
@@ -150,11 +120,4 @@ class UsersController extends AppController {
         return $this->redirect(array('action' => 'index'));
     }
 
-    
-    //noel review
-    
-    public function listusers(){
-       $data = $this->User->find('all');
-       $this->set('users',$data);
-    }
 }
