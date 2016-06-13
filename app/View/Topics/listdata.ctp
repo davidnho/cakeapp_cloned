@@ -1,4 +1,7 @@
 <h2>Topics</h2>
+
+<?php echo $this->HTML->link('Create a new topic',array('controller'=>'topics','action'=>'create')); ?>
+
 <table>
     <tr>
         

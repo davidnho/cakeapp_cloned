@@ -70,7 +70,7 @@ class TopicsController extends AppController {
             //save the data coming from the form. if the data saved, redirect
             if ($this->Topic->save($this->request->data)) {
                 $this->Session->setFlash('The topic has been created');
-                $this->redirect('redirectpage');
+                $this->redirect('listdata');
             }
         }
     }
