@@ -8,8 +8,8 @@ echo $this->Form->create('Topic');
 //echo $this->Form->input('modified');
 
 echo $this->Form->input('title'); 
+echo $this->Form->select('visible',array('1'=>'Published','2'=>'Hidden'),array('empty'=>FALSE)); 
 
-//echo $this->Form->input('visible'); 
 
 /* this will end the form and creates a button */
 echo $this->Form->end('Submit'); 
