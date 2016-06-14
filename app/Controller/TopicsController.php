@@ -66,8 +66,13 @@ class TopicsController extends AppController {
     public function create() {
 
         if ($this->request->is('post')) {
-             $this->Topic->create(); //create the model
-             $this->request->data['Topic']['visible'] = 2;
+
+            $this->Topic->create(); //create the model
+            if (AuthComponent::user('role') == 1) {
+                $this->request->data['Topic']['visible'] = 2;
+            }
+            $this->request->data['Topic']['user_id'] = AuthComponent::user('id');
+
             //save the data coming from the form. if the data saved, redirect
             if ($this->Topic->save($this->request->data)) {
                 $this->Session->setFlash('The topic has been created');
@@ -110,10 +115,10 @@ class TopicsController extends AppController {
         //create a variable that will hold the data
         $this->request->data = $data;
     }
-    
-    public function deletedata($id){
+
+    public function deletedata($id) {
         $this->Topic->id = $id;
-         if ($this->request->is(array('post', 'put'))) {
+        if ($this->request->is(array('post', 'put'))) {
             if ($this->Topic->delete()) {
                 $this->Session->setFlash('The topic has been deleted');
                 $this->redirect('listdata');
